@@ -1,7 +1,7 @@
 [
 	{
 		"ParameterKey": "EnvironmentName",
-		"ParameterValue": "High Availability web app"
+		"ParameterValue": "HA-web-app"
 	},
 	{
 		"ParameterKey": "VpcCIDR",

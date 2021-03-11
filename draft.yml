@@ -4,7 +4,7 @@
       Properties: 
         Roles:
           - UdacityS3ReadOnlyEC2
-  
+
             #!/bin/bash
             apt-get update -y
             apt-get install unzip awscli -y
@@ -13,3 +13,23 @@
             cd /var/www/html
             aws s3 cp s3://udacity-demo-1/udacity.zip .
             unzip -o udacity.zip
+
+
+  WebAppLaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt-get update -y
+          sudo apt-get install apache2 -y
+          sudo systemctl start apache2.service          
+      ImageId: ami-02701bcdc5509e57b #ubuntu image 
+      KeyName: that-one
+      SecurityGroups:
+      - Ref: WebServerSecGroup
+      InstanceType: t2.medium  #free eligible t2.micro
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sdk"
+        Ebs:
+          VolumeSize: '10'
