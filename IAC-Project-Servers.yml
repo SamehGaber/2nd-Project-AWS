@@ -84,7 +84,7 @@ Resources:
             Action: 
               - 'sts:AssumeRole'
       ManagedPolicyArns:
-         - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
 
     ProfileWithRolesForOurApp:
      Type: AWS::IAM::InstanceProfile
@@ -156,5 +156,13 @@ Resources:
          VpcId:
            Fn::ImportValue:
             !Sub "${EnvironmentName}-VPCID"  
+
+Outputs: 
+
+    LB: 
+        Description: A reference to the created VPC
+        Value: !Ref WebAppLB
+        Export:
+          DNS name: !Sub ${EnvironmentName}-LB
 
  
