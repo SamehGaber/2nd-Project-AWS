@@ -157,12 +157,32 @@ Resources:
            Fn::ImportValue:
             !Sub "${EnvironmentName}-VPCID"  
 
+
+    BastionInstance: 
+      Type: AWS::EC2::Instance
+      Properties: 
+        ImageId: ami-0e999cbd62129e3b1
+        KeyName: ms-lab
+        InstanceType: t2.micro      
+        NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          SubnetId:  
+            Fn::ImportValue:
+              !Sub "${EnvironmentName}-PUB1-SN"
+          GroupSet:
+            - Ref: EC2SecGroup
+        BlockDeviceMappings: 
+        - DeviceName: "/dev/sdk"
+          Ebs: 
+            VolumeSize: "10"
+
 Outputs: 
 
     LB: 
         Description: A reference to the created VPC
-        Value: !Ref WebAppLB
+        Value: !GetAtt WebAppLB.DNSName 
         Export:
-          DNS name: !Sub ${EnvironmentName}-LB
+          Name: !Sub ${EnvironmentName}-LB
 
  
