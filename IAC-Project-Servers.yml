@@ -54,7 +54,7 @@ Resources:
          IamInstanceProfile: !Ref ProfileWithRolesForOurApp
          SecurityGroups:
          - Ref: EC2SecGroup
-         InstanceType: t2.micro  #free eligible t2.micro / t2.medium is the required
+         InstanceType: t2.medium  #free eligible t2.micro / t2.medium is the required
          BlockDeviceMappings:
          - DeviceName: "/dev/sdk"
            Ebs:
@@ -182,7 +182,7 @@ Resources:
     BastionInstance: 
       Type: AWS::EC2::Instance
       Properties: 
-        ImageId: ami-0e999cbd62129e3b1
+        ImageId: ami-0e999cbd62129e3b1 #amazon linux AMI 
         KeyName: ms-lab
         InstanceType: t2.micro      
         NetworkInterfaces: 
