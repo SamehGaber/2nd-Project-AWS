@@ -2,5 +2,9 @@
 	{
 		"ParameterKey": "EnvironmentName",
 		"ParameterValue": "HA-web-app"
+	},
+	{
+		"ParameterKey": "MyIpAddress",
+		"ParameterValue": "156.208.227.22/32"
 	}
 ]

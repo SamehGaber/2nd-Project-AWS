@@ -48,7 +48,6 @@ Resources:
         
          ImageId: ami-02701bcdc5509e57b #ubuntu image 
          IamInstanceProfile: !Ref ProfileWithRolesForOurApp
-         KeyName: ms-lab
          SecurityGroups:
          - Ref: EC2SecGroup
          InstanceType: t2.micro  #free eligible t2.micro / t2.medium is the required
@@ -62,11 +61,11 @@ Resources:
         Properties:
          VPCZoneIdentifier: 
          - Fn::ImportValue: 
-            !Sub  ${EnvironmentName}-PUB-NETS
+            !Sub  ${EnvironmentName}-PRIV-NETS
          LaunchConfigurationName:
             Ref: WebAppLaunchConfig
-         MinSize: '3'
-         MaxSize: '5'
+         MinSize: '4'
+         MaxSize: '6'
          TargetGroupARNs:
          - Ref: WebAppTargetGroup
     
